@@ -5,6 +5,8 @@ class Word():
     pos = None
 
     gold_tag = None
+    gold_text = None
+    
     pred_tag = None
 
     def __init__(self):
