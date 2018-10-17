@@ -6,6 +6,7 @@ class Word():
 
     gold_tag = None
     gold_text = None
+    rel_id = None
     
     pred_tag = None
 
