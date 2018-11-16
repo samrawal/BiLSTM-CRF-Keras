@@ -12,4 +12,9 @@ class Word():
 
     def __init__(self):
         pass
+    def __str__(self):
+        string_representation = '{0}//({1}-{2})//{3}'.format(
+            self.text, self.start_char, self.end_char, self.gold_concept
+        )
+        return string_representation
     
