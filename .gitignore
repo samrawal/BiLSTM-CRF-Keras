@@ -35,3 +35,9 @@ temp/
 utils/clamp
 *.ipynb
 .unused/data
+
+# keep data directories, but not files
+data/**/*.txt
+data/**/*.xmi
+data/**/*.ann
+data/**/*.ser
