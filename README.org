@@ -1,6 +1,12 @@
 * Project Structure
+  
 .
 ├── data
+│   └── n2c2
+│       ├── clamp
+│       ├── interim
+│       ├── processed
+│       └── raw
 ├── docs
 │   └── resources
 ├── models
@@ -12,4 +18,4 @@
         ├── __pycache__
         └── ipynb
 
-11 directories
+16 directories
