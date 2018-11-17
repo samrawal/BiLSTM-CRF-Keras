@@ -34,5 +34,4 @@ temp/
 # project
 utils/clamp
 *.ipynb
-.unused/
-data
+.unused/data
