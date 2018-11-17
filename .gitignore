@@ -34,7 +34,7 @@ temp/
 # project
 utils/clamp
 *.ipynb
-.unused/data
+.unused/
 
 # keep data directories, but not files
 data/**/*.txt
