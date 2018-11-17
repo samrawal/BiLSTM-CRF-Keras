@@ -1,0 +1,15 @@
+* Project Structure
+.
+├── data
+├── docs
+│   └── resources
+├── models
+└── src
+    ├── data
+    ├── model
+    │   └── ipynb
+    └── utils
+        ├── __pycache__
+        └── ipynb
+
+11 directories
