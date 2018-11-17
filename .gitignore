@@ -33,3 +33,4 @@ temp/
 
 # project
 utils/clamp
+*.ipynb
