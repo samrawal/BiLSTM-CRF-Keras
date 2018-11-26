@@ -1,8 +1,8 @@
 import os, sys, pickle, glob
 from tqdm import tqdm
-PROJ_PATH = os.environ['colab'] + '/prescription_extraction'
-sys.path.append(PROJ_PATH)
-from src.data.n2c2_utils import n2c2Parser
+PROJ_PATH = open('/tmp/PROJ_PATH.txt', 'r').read().strip()
+sys.path.append(PROJ_PATH+'/src/')
+from data.n2c2_utils import n2c2Parser
 
 def parse_file(file_number, has_gold):
     raw_file = PROJ_PATH + '/data/n2c2/raw/{0}.txt'.format(file_number)
