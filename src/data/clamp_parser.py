@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as ET
 import pickle
-from src.utils.word import Word
+from utils.word import Word
 
 '''
 XMI FILE FORMAT:
