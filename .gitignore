@@ -36,6 +36,7 @@ utils/clamp
 *.ipynb
 .unused/
 .projectile
+__init__.py
 
 # keep data directories, but not files
 data/**/*.txt
