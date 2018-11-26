@@ -18,14 +18,11 @@ def parse_file(file_number, has_gold):
               'wb') as f:
         pickle.dump(parser.tokens, f)
 
-def parse_all_files(directory, has_gold):
-    for f in tqdm(glob.glob(directory+'/*.txt'), desc='Intermediate processing'):
+def parse_all_files(directory=None, has_gold=True):
+    if directory == None:
+        directory = PROJ_PATH + '/data/n2c2/raw/'
+    for f in tqdm(glob.glob(directory+'/*.txt'), 'Intermediate processing'):
         parse_file(f[len(directory):-4], has_gold)
 
-def main():
-    directory = PROJ_PATH + '/data/n2c2/raw/'
-    has_gold = True
-    parse_all_files(directory, has_gold)
-    
 if __name__ == '__main__':
-    main()
+    parse_all_files()
