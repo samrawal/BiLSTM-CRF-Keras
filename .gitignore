@@ -35,6 +35,7 @@ temp/
 utils/clamp
 *.ipynb
 .unused/
+.projectile
 
 # keep data directories, but not files
 data/**/*.txt
