@@ -9,7 +9,6 @@ def sentence_tokenize(wordlists=None):
     if wordlists == None:
         wordlists = glob.glob(PROJ_PATH + '/data/n2c2/interim/*.ser')
     for f in tqdm(wordlists, 'Sentence tokenizing wordlists'):
-        f = wordlists[0]
         wordlist = pickle.load(open(f, 'rb'))
         index = 0
         sent_wordlist = []
