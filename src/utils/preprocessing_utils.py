@@ -87,7 +87,7 @@ def dict_detokenize(tokenizer, sents):
 
 # helper to specifically tokenize characters
 def tokenize_chars(sents):
-    chars = " 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.,-_()[]{}!?:;#'\"/\\%$`&=*+@^~|"    
+    chars = r" 0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.,-_()[]{}<>!?:;#'\"/\\%$`&=*+@^~|"    
     mapper = {'PADDING_TOKEN': 0, 'UNKNOWN_TOKEN': 1}
     for c in chars:
         mapper[c] = len(mapper)
@@ -120,3 +120,17 @@ def split_words(sents, padding=False, pad_len=None):
                 padded_sentence.append(p_w)
             padded_data.append(padded_sentence)
         return np.array(padded_data)
+
+
+def pad_sentences(wordlist, padding=20):
+    padded_wordlist = []
+    padding_token = Word()
+    padding_token.set_as_pad_token()
+    for s in wordlist:
+        padded = [padding_token] * padding
+        if len(s) > padding:
+            padded = s[:padding]
+        else:
+            padded[padding-len(s):] = s
+        padded_wordlist.append(padded)
+    return padded_wordlist
