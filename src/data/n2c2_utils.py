@@ -38,6 +38,11 @@ class n2c2Parser():
                         self.tokens[token].gold_concept = data['concept']
                         self.tokens[token].gold_text = data['text']
                         self.tokens[token].gold_id = data['id']
+
+                        if self.tokens[token].start_char == data['start_offset']:
+                            self.tokens[token].iob_tag = 'B'
+                        else:
+                            self.tokens[token].iob_tag = 'I'
                 if not tagged_data:
                     print('Data was not tagged for line:\n{0} in file {1}'.format(data, self.filepath))
 
