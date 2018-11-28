@@ -1,5 +1,10 @@
 # Sam Rawal <samrawal@asu.edu>
 
+import os, sys, pickle, glob
+from tqdm import tqdm
+PROJ_PATH = open('/tmp/PROJ_PATH.txt', 'r').read().strip()
+sys.path.append(PROJ_PATH+'/src/')
+from utils.word import Word
 import numpy as np
 from keras.preprocessing.text import Tokenizer
 
@@ -9,14 +14,15 @@ from keras.preprocessing.text import Tokenizer
 # Take sentences in format: [[w, w, w...], [w, w, w...], ...] and return
 # sequence in same structure, but with the words tokenized (as ints)
 # Can fit new tokenizer (training data) or use existing tokenizer (testing)
-def tokenize(sentences, t=None):
+def tokenize(sentences, t=None, numpy=False):
+    sents = sentences.tolist() if numpy else sentences
     if not t:
         tokenizer = Tokenizer(lower=False)
-        tokenizer.fit_on_texts(sentences.tolist() +
+        tokenizer.fit_on_texts(sents +
                                [['PADDING_TOKEN', 'UNKNOWN_TOKEN']])
     else:
         tokenizer = t
-    return np.array([[tokenizer.word_index[w] if w in tokenizer.word_index else tokenizer.word_index['UNKNOWN_TOKEN'] for w in s] for s in sentences]), tokenizer
+    return np.array([[tokenizer.word_index[w] if w in tokenizer.word_index else tokenizer.word_index['UNKNOWN_TOKEN'] for w in s] for s in sents]), tokenizer
 
 # Tokenize and pad a single sentence. Useful when sampling trained model
 # Sentence input: string
@@ -42,10 +48,11 @@ def detokenize(sentence, tokenizer):
 
 # Given list of words/tags (strings), one-hot encode them with a
 # new tokenizer (training data) or existing tokenizer (testing)
-def one_hot_encode(tags, t=None):
+def one_hot_encode(tags, t=None, numpy=False):
+    tags = tags.tolist() if numpy else tags
     if not t:
         tokenizer = Tokenizer(lower=False)
-        tokenizer.fit_on_texts(tags.tolist())
+        tokenizer.fit_on_texts(tags)
     else:
         tokenizer = t
     return np.array([[one_hot_help(w, tokenizer) for w in s] for s in tags]), tokenizer
