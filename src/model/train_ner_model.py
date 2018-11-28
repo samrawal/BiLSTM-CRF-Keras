@@ -41,11 +41,6 @@ model_parameters = json.load(open(PROJ_PATH + '/src/model/config.json', 'r'))
 model_parameters['vocab_size'] = len(word_tokenizer.word_index)
 model_parameters['char_dim'] = len(char_tokenizer)
 model_parameters['output_dim'] = len(concept_tokenizer.word_index)
-model_parameters = {
-    'vocab_size': len(word_tokenizer.word_index),
-    'char_dim': len(char_tokenizer),
-    'output_dim': len(concept_tokenizer.word_index),
-}
 
 print(model_parameters)
 model = BiLSTM_CRF(model_parameters)
