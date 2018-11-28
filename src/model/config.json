@@ -1,0 +1,11 @@
+{
+  "model_name": "BiLSTM_CRF_1",
+  "model_backend": "keras",
+  "embedding_dim": null,
+  "num_epochs": null,
+  "max_sentence": null,
+  "max_word": null,
+  "vocab_size": null,
+  "output_dim": null,
+  "char_dim": null
+}
