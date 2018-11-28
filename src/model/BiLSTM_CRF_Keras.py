@@ -35,21 +35,21 @@ class BiLSTM_CRF():
         self.char_dim = 99
             
         if params != None:
-            if 'embedding_dim' in params:
+            if 'embedding_dim' in params and params['embedding_dim'] != None:
                 self.embedding_dim = params['embedding_dim']
-            if 'num_epochs' in params:
+            if 'num_epochs' in params and params['num_epochs'] != None:
                 self.num_epochs = params['num_epochs']
-            if 'max_sentence' in params:
+            if 'max_sentence' in params and params['max_sentence'] != None:
                 self.max_sentence = params['max_sentence']
-            if 'max_word' in params:
+            if 'max_word' in params and params['max_word'] != None:
                 self.max_word  = params['max_word']
-            if 'model_name' in params:
+            if 'model_name' in params and params['model_name'] != None:
                 self.model_name = params['model_name']
-            if 'vocab_size' in params:
+            if 'vocab_size' in params and params['vocab_size'] != None:
                 self.vocab_size = params['vocab_size']
-            if 'output_dim' in params:
+            if 'output_dim' in params and params['output_dim'] != None:
                 self.output_dim = params['output_dim']
-            if 'char_dim' in params:
+            if 'char_dim' in params and params['char_dim'] != None:
                 self.char_dim = params['char_dim']
 
     def define_model(self, char_embedding_dim = 120, word_embedding_dim=120, char_lstm_cell=20, lstm_cell=20):
