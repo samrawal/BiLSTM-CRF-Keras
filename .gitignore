@@ -30,13 +30,13 @@ __pycache__
 temp/
 .projectile
 
-
 # project
 utils/clamp
 *.ipynb
 .unused/
 .projectile
 __init__.py
+src/data/n2c2
 
 # keep data directories, but not files
 data/**/*.txt
