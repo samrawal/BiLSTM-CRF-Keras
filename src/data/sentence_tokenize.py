@@ -5,9 +5,11 @@ PROJ_PATH = open('/tmp/PROJ_PATH.txt', 'r').read().strip()
 sys.path.append(PROJ_PATH+'/src/')
 from utils.word import Word
 
-def sentence_tokenize(wordlists=None):
-    if wordlists == None:
-        wordlists = glob.glob(PROJ_PATH + '/data/n2c2/interim/*.ser')
+def sentence_tokenize(wordlist_dir=None, proc_dir=None):
+    if wordlist_dir == None:
+        wordlists = glob.glob(PROJ_PATH + '/data/n2c2/train/interim/*.ser')
+    else:
+        wordlists = glob.glob(PROJ_PATH + '/' + wordlist_dir + '/*.ser')
     for f in tqdm(wordlists, 'Sentence tokenizing wordlists'):
         wordlist = pickle.load(open(f, 'rb'))
         index = 0
@@ -24,7 +26,7 @@ def sentence_tokenize(wordlists=None):
                 index += numwords
         if len(wordlist) != sum([len(sent) for sent in sent_wordlist]):
             print('Error: len(wordlist) != sum(len(sentences))')
-        with open(PROJ_PATH + '/data/n2c2/processed/{0}'.format(
+        with open(PROJ_PATH + '/' + proc_dir +'/{0}'.format(
                 os.path.basename(f)), 'wb') as proc_file:
             pickle.dump(sent_wordlist, proc_file)
 

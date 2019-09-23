@@ -15,22 +15,22 @@ class BiLSTM_CRF():
     num_epochs = None
     max_sentence = None
     max_word = None
-    model_name = None
+    model_title = None
     vocab_size = None
     output_dim = None
     char_dim = None
 
     model = None
     
-    def __init__(self, params=None):
-        self.set_params(params)
+    def __init__(self, params=None, title=None):
+        self.set_params(params, title)
 
-    def set_params(self, params):
+    def set_params(self, params, title):
+        self.model_title = title if title != None else 'untitled_BiLSTM-CRF'      
         self.embedding_dim = 100
         self.num_epochs = 10
         self.max_sentence = 20
         self.max_word = 25
-        self.model_name = 'my_model'
         self.vocab_size = 500
         self.char_dim = 99
             
@@ -43,8 +43,6 @@ class BiLSTM_CRF():
                 self.max_sentence = params['max_sentence']
             if 'max_word' in params and params['max_word'] != None:
                 self.max_word  = params['max_word']
-            if 'model_name' in params and params['model_name'] != None:
-                self.model_name = params['model_name']
             if 'vocab_size' in params and params['vocab_size'] != None:
                 self.vocab_size = params['vocab_size']
             if 'output_dim' in params and params['output_dim'] != None:
@@ -99,15 +97,11 @@ class BiLSTM_CRF():
 
         self.model = m
 
-    def generate_model_diagram(self):
+    def generate_model_diagram(self, save_dir, model_name=self.model_title):
         self.model.summary()
-        '''
-        if not os.path.exists(PROJ_PATH+'saved_models/{0}'.format(model_name)):
-            os.makedirs(PROJ_PATH+'saved_models/{0}'.format(model_name))
-        plot_model(model,
-                to_file=PROJ_PATH+'saved_models/{0}/{0}_architecture.png'.format(model_name),
+        plot_model(self.model,
+                to_file=save_dir + '{0}_architecture.png'.format(model_name),
                 show_shapes=True)
-        '''
 
     def train(self, train_sents, train_chars, train_ner,
                 valid_sents=None, valid_chars=None, valid_ner=None):
@@ -137,6 +131,11 @@ class BiLSTM_CRF():
             return method(*args)
         return {"ClassWrapper": ClassWrapper ,"CRF": ClassWrapper, "loss": loss, "accuracy":accuracy}
 
+    def save_model(self, save_dir, model_name=self.model_title):
+        self.model.save('{0}/{1}.h5'.format(save_dir, model_name))
+
     def load_model(self, path):
         model = load_model(path, custom_objects=self.create_custom_objects())
         return model
+
+    
