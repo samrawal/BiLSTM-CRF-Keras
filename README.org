@@ -1,29 +1,24 @@
-* Project Structure
-#+BEGIN_SRC
-.
-├── data
-│   └── n2c2
-│       ├── clamp
-│       ├── interim
-│       ├── processed
-│       └── raw
-├── docs
-│   └── resources
-├── models
-└── src
-    ├── data
-    ├── model
-    │   └── ipynb
-    └── utils
-        ├── __pycache__
-        └── ipynb
+* Named Entity Recognition with BiLSTM-CRF in Keras 
+** Overview
+This repository contains an implementation of a BiLSTM-CRF network in Keras for performing Named Entity Recognition (NER). This implementation was created with the goals of allowing *flexibility* through configuration options that do not require significant changes to the code each time, and simple, robust *logging* to keep tabs on model performances without extra effort.
 
-16 directories
-#+END_SRC
+- Model parameters are exposed through a JSON config file for easy configuration.
+- Supports automatic logging of train/test results, model parameters, etc. across multiple trials
+- Supports initializing embedding layer with weights from pretrained word2vec model (optional)
 
-* Todo
-** Gold File Issue
-- Some gold file annotations have spaces in between them (see `$PROJ_PATH/.unused/log/n2c2_preprocessing.log`).
-- For now, closing those gaps in the gold files (handling in `n2c2-parser`)
-- TODO: Figure out long-term fix
+Inspired by Guillaume Genthial's [[https://github.com/guillaumegenthial/sequence_tagging][LSTM+CRF Tensorflow implementation]], and following the completion of my [[https://repository.asu.edu/items/48493][Honors Undergraduate Thesis]], I decided to create my own implementation of a BiLSTM-CRF model that would provide flexibility, while providing easy model logging and configuration without needing to make significant changes in the code each time.
 
+** Model
+This is an implementation of the BiLSTM-CRF architecture described in [[https://arxiv.org/abs/1603.01360][Lample et al.]] Both character- and word-level representations are used for the input. Additionally, the word-level embedding layer can be initialized with pretrained word2vec model weights. 
+
+[[./docs/resources/BiLSTM-CRF.png]]
+
+
+
+
+* Requirements
+- Python 3.x
+- Keras
+- Tensorflow
+- numpy
+- tqdm
